@@ -71,3 +71,16 @@ def generate_nicks_recipe(x, number_of_events=-1):
       print('MC')
 
   print(f'cmsRun {configuration_file}')
+
+###############################################################################################
+
+###############################################################################################
+
+def gcp_location(d, x, y):
+  for i in d[x][y]:
+    gcp_location_list = []
+    for j in i.keys():
+      if j == 'GCP_location':
+        for f in d[x][y]:
+          gcp_location_list.append(f[j])
+  return gcp_location_list
