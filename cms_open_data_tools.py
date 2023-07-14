@@ -84,3 +84,23 @@ def gcp_location(d, x, y):
         for f in d[x][y]:
           gcp_location_list.append(f[j])
   return gcp_location_list
+
+###############################################################################################
+def pretty_print(datasets):
+  for colMC in datasets.keys():
+    print(f"{colMC} -------------")
+    #print(colMC,datasets[colMC])
+    names = datasets[colMC].keys()
+    #output = f"{names}"
+    #print(output)
+    for name in names:
+      output = f"\t{name}"
+      print(output)
+      sub_datasets = datasets[colMC][name]
+      for sub_dataset in sub_datasets:
+        #print(sub_dataset)
+        for key in sub_dataset.keys():
+          output = f"\t\t{key:20s}: {sub_dataset[key]}"
+          print(output)
+  print()
+
