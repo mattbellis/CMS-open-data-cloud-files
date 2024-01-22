@@ -7,7 +7,7 @@ datasets['MC'] = {}
 datasets['collision']['Doublemuon'] = []
 file = {"tag":'DoubleMuon_2015_0000', \
         "GCP_location":'/content/colab_directory/DoubleMuon_2015_0000_NANOAOD.root', \
-        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/Run2015D/DoubleMuon/MINIAOD/16Dec2015-v1/10000/00348932-30A8-E511-989A-00261894394A.root doublemuon_miniaod.root', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/Run2015D/DoubleMuon/MINIAOD/16Dec2015-v1/10000/00348932-30A8-E511-989A-00261894394A.root', \
         "OpenDataPortal_link": 'XXX'}
 datasets['collision']['Doublemuon'].append(file)
 
@@ -18,10 +18,28 @@ TTbar_file = {"tag":'TTbar_2015_0000', \
         "OpenDataPortal_link": 'XXX'}
 datasets['MC']['TTbar'].append(TTbar_file)
 
+################################################################################
+# New for 2024!
+datasets['MC']['TTTo2L2Nu'] = []
+# File
+entry = {"tag":'TTTo2L2Nu_2015_0000', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02A468DA-E8B9-E511-942C-0022195E688C.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
+datasets['MC']['TTTo2L2Nu'].append(entry)
+
+# File
+entry = {"tag":'TTTo2L2Nu_2015_0001', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02E52F5F-C5B9-E511-A146-001EC9ADE1C2.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
+datasets['MC']['TTTo2L2Nu'].append(entry)
+################################################################################
+
 datasets['MC']['DY'] = []
 dy_file = {"tag":'DY_2015_0000', \
         "GCP_location":'/content/colab_directory/DY_2015_0000_NANOAOD.root', \
-        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgrap    hMLM-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/10000/06761E14-6ED8-E511-BBCD-0025905B85B2.root dy_miniaod.root', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/10000/06761E14-6ED8-E511-BBCD-0025905B85B2.root', \
         "OpenDataPortal_link": 'XXX'}
 datasets['MC']['DY'].append(dy_file)
 
@@ -42,18 +60,17 @@ datasets['MC']['Darkmatter'].append(darkmatter_file)
 ###############################################################################################
 
 ###############################################################################################
-def generate_nicks_recipe(x, number_of_events=-1):
+def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1):
 
   tag_nevents = 'default'
   if number_of_events == -1:
-    tag_nevents = 'ALL_EVENTS_IN_MINIAOD'
+    tag_nevents = 'nevents_all'
   else:
     tag_nevents = f'nevents_{number_of_events}'
 
-  miniAOD = f'DATA_miniAOD_{x[0]["tag"]}.root'
-  configuration_file = f'{x[0]["tag"]}_cfg.py'
-  print(f'xrdcp {x[0]["miniAOD_file"]} {miniAOD}\n')
+  datasets = []
 
+  '''
   for i in datasets['collision']:
     if datasets['collision'][i] == x:
       print(f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAOD --datatier NANOAOD \
@@ -61,16 +78,47 @@ def generate_nicks_recipe(x, number_of_events=-1):
   --filein file:{miniAOD}_miniaod.root --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --data -n {number_of_events} \
   --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeData_onlyPF\n')
       print('collision')
+  '''
 
-  for i in datasets['MC']:
-    if datasets['MC'][i] == x:
-      print(f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAODSIM --datatier NANOAODSIM \
-        --fileout file:{x[0]["tag"]}_{tag_nevents}_nanoaod.root --conditions 102X_mcRun2_asymptotic_v8 --step NANO \
-        --filein file:{miniAOD} --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --mc -n {number_of_events} \
-        --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC_onlyPF\n')
-      print('MC')
+  if IS_MC:
+      datasets = all_datasets['MC'][tag]
+      print("Generating commands to run...")
+      counter = 0
+      for dataset in datasets:
+          print("##############\nData set....\n##############\n")
+          #print(dataset)
+          #print()
+          
+          counter_tag = f"{counter:04d}"
 
-  print(f'cmsRun {configuration_file}')
+          miniAOD = dataset["miniAOD_file"]
+          miniAOD_local_file = miniAOD.split('/')[-1]
+          configuration_file = f'MC_{tag}_{counter_tag}_cfg.py'
+          output_file = f'MC_{tag}_2015_{tag_nevents}_{counter_tag}_NanoAOD.root'
+
+          print("# Run this command to copy over the file...\n")
+          print(f'xrdcp {miniAOD} {miniAOD_local_file}\n')
+          print()
+
+          print("# Then run this command to create the configuration file convert from miniAOD to NanoAOD...\n")
+          output = f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAODSIM --datatier NANOAODSIM '
+          output += f' --fileout file:{output_file} --conditions 102X_mcRun2_asymptotic_v8 --step NANO '
+          output += f' --filein file:{miniAOD_local_file} --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --mc -n {number_of_events} '
+          output += f' --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC_onlyPF'
+          print(output)
+          print()
+          print()
+
+          print("# Then run this command to actually do the conversion from miniAOD to NanoAOD...it may take a while\n")
+          print(f'time cmsRun {configuration_file}')
+          print()
+          print()
+
+          print("# The file that was produced should be the following. Upload this file to GCP")
+          print("# and add the file name to the dictionary.\n")
+          print(output_file)
+          print()
+          print()
 
 ###############################################################################################
 
