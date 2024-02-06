@@ -23,7 +23,7 @@ datasets['MC']['TTbar'].append(TTbar_file)
 datasets['MC']['TTTo2L2Nu'] = []
 # File
 entry = {"tag":'TTTo2L2Nu_2015_0000', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory/MC_TTTo2L2Nu_2015_nevents_100_0000_NanoAOD.root', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02A468DA-E8B9-E511-942C-0022195E688C.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
 datasets['MC']['TTTo2L2Nu'].append(entry)
