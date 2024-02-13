@@ -93,7 +93,7 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1):
 
           miniAOD = dataset["miniAOD_file"]
           miniAOD_local_file = miniAOD.split('/')[-1]
-          configuration_file = f'MC_{tag}_{counter_tag}_cfg.py'
+          configuration_file = f'MC_{tag}_{counter_tag}_{tag_nevents}_cfg.py'
           output_file = f'MC_{tag}_2015_{tag_nevents}_{counter_tag}_NanoAOD.root'
 
           print("# Run this command to copy over the file...\n")
@@ -119,6 +119,8 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1):
           print(output_file)
           print()
           print()
+
+          counter += 1
 
 ###############################################################################################
 
@@ -151,4 +153,6 @@ def pretty_print(datasets):
           output = f"\t\t{key:20s}: {sub_dataset[key]}"
           print(output)
   print()
+
+###############################################################################################
 
