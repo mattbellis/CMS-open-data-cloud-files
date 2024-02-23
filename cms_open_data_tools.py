@@ -1,3 +1,4 @@
+import os
 ###############################################################################################
 datasets = {}
 
@@ -62,67 +63,76 @@ datasets['MC']['Darkmatter'].append(darkmatter_file)
 ###############################################################################################
 def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, RUN=False):
 
-  tag_nevents = 'default'
-  if number_of_events == -1:
-    tag_nevents = 'nevents_all'
-  else:
-    tag_nevents = f'nevents_{number_of_events}'
+    print(number_of_events)
+    tag_nevents = 'default'
+    if number_of_events == -1:
+        tag_nevents = 'nevents_all'
+    else:
+        tag_nevents = f'nevents_{number_of_events}'
+    
+    '''
+    for i in datasets['collision']:
+      if datasets['collision'][i] == x:
+        print(f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAOD --datatier NANOAOD \
+    --fileout file:{x[0]["tag"]}_{tag_nevents}_nanoaod.root --conditions 106X_dataRun2_v36 --step NANO \
+    --filein file:{miniAOD}_miniaod.root --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --data -n {number_of_events} \
+    --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeData_onlyPF\n')
+        print('collision')
+    '''
 
-  datasets = []
+    if IS_MC:
+        datasets = all_datasets['MC'][tag]
+        print("Generating commands to run...")
+        counter = 0
+        for dataset in datasets:
+            print("##############\nData set....\n##############\n")
+            print(dataset)
+            #print()
 
-  '''
-  for i in datasets['collision']:
-    if datasets['collision'][i] == x:
-      print(f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAOD --datatier NANOAOD \
-  --fileout file:{x[0]["tag"]}_{tag_nevents}_nanoaod.root --conditions 106X_dataRun2_v36 --step NANO \
-  --filein file:{miniAOD}_miniaod.root --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --data -n {number_of_events} \
-  --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeData_onlyPF\n')
-      print('collision')
-  '''
+            counter_tag = f"{counter:04d}"
 
-  if IS_MC:
-      datasets = all_datasets['MC'][tag]
-      print("Generating commands to run...")
-      counter = 0
-      for dataset in datasets:
-          print("##############\nData set....\n##############\n")
-          #print(dataset)
-          #print()
-          
-          counter_tag = f"{counter:04d}"
+            miniAOD = dataset["miniAOD_file"]
+            miniAOD_local_file = miniAOD.split('/')[-1]
+            configuration_file = f'MC_{tag}_{counter_tag}_{tag_nevents}_cfg.py'
+            output_file = f'MC_{tag}_2015_{tag_nevents}_{counter_tag}_NanoAOD.root'
 
-          miniAOD = dataset["miniAOD_file"]
-          miniAOD_local_file = miniAOD.split('/')[-1]
-          configuration_file = f'MC_{tag}_{counter_tag}_{tag_nevents}_cfg.py'
-          output_file = f'MC_{tag}_2015_{tag_nevents}_{counter_tag}_NanoAOD.root'
+            print("# Run this command to copy over the file...\n")
+            cmd = f'xrdcp {miniAOD} {miniAOD_local_file}\n'
+            print(cmd)
+            os.system(cmd)
+            print()
 
-          print("# Run this command to copy over the file...\n")
-          print(f'xrdcp {miniAOD} {miniAOD_local_file}\n')
-          print()
+            print("# Then run this command to create the configuration file convert from miniAOD to NanoAOD...\n")
+            cmd = f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAODSIM --datatier NANOAODSIM '
+            cmd += f' --fileout file:{output_file} --conditions 102X_mcRun2_asymptotic_v8 --step NANO '
+            cmd += f' --filein file:{miniAOD_local_file} --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --mc -n {number_of_events} '
+            cmd += f' --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC_onlyPF'
+            print(cmd)
+            os.system(cmd)
+            print()
+            print()
 
-          print("# Then run this command to create the configuration file convert from miniAOD to NanoAOD...\n")
-          cmd = f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAODSIM --datatier NANOAODSIM '
-          cmd += f' --fileout file:{output_file} --conditions 102X_mcRun2_asymptotic_v8 --step NANO '
-          cmd += f' --filein file:{miniAOD_local_file} --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --mc -n {number_of_events} '
-          cmd += f' --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC_onlyPF'
-          print(cmd)
-          print()
-          print()
+            print("# Then run this command to actually do the conversion from miniAOD to NanoAOD...it may take a while\n")
+            cmd = f'time cmsRun {configuration_file}'
+            print(cmd)
+            os.system(cmd)
+            print()
 
-          print("# Then run this command to actually do the conversion from miniAOD to NanoAOD...it may take a while\n")
-          cmd = f'time cmsRun {configuration_file}'
-          print(cmd)
-          print()
+            print("# The file that was produced should be the following. Upload this file to GCP")
+            print("# and add the file name to the dictionary.\n")
+            print(output_file)
+            print()
+            print()
 
-          print("# The file that was produced should be the following. Upload this file to GCP")
-          print("# and add the file name to the dictionary.\n")
-          print(output_file)
-          print()
-          print()
+            print("# Copying over the file to CERNBox space...")
+            cmd = f"cp {output_file} /afs/cern.ch/user/m/mbellis/eos_storage/data_files/."
+            print(cmd)
+            os.system(cmd)
 
-          counter += 1
+            counter += 1
 
 ###############################################################################################
+'''
 
 ###############################################################################################
 
@@ -156,3 +166,4 @@ def pretty_print(datasets):
 
 ###############################################################################################
 
+'''
