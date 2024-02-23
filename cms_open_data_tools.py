@@ -60,7 +60,7 @@ datasets['MC']['Darkmatter'].append(darkmatter_file)
 ###############################################################################################
 
 ###############################################################################################
-def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1):
+def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, RUN=False):
 
   tag_nevents = 'default'
   if number_of_events == -1:
@@ -101,17 +101,17 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1):
           print()
 
           print("# Then run this command to create the configuration file convert from miniAOD to NanoAOD...\n")
-          output = f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAODSIM --datatier NANOAODSIM '
-          output += f' --fileout file:{output_file} --conditions 102X_mcRun2_asymptotic_v8 --step NANO '
-          output += f' --filein file:{miniAOD_local_file} --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --mc -n {number_of_events} '
-          output += f' --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC_onlyPF'
-          print(output)
+          cmd = f'cmsDriver.py --python_filename {configuration_file} --eventcontent NANOAODSIM --datatier NANOAODSIM '
+          cmd += f' --fileout file:{output_file} --conditions 102X_mcRun2_asymptotic_v8 --step NANO '
+          cmd += f' --filein file:{miniAOD_local_file} --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --mc -n {number_of_events} '
+          cmd += f' --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC_onlyPF'
+          print(cmd)
           print()
           print()
 
           print("# Then run this command to actually do the conversion from miniAOD to NanoAOD...it may take a while\n")
-          print(f'time cmsRun {configuration_file}')
-          print()
+          cmd = f'time cmsRun {configuration_file}'
+          print(cmd)
           print()
 
           print("# The file that was produced should be the following. Upload this file to GCP")
