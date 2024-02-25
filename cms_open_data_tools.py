@@ -35,6 +35,28 @@ entry = {"tag":'TTTo2L2Nu_2015_0001', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02E52F5F-C5B9-E511-A146-001EC9ADE1C2.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
 datasets['MC']['TTTo2L2Nu'].append(entry)
+
+# File
+entry = {"tag":'TTTo2L2Nu_2015_0002', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/007FEAD7-53BA-E511-B4F0-001EC9ADE6D1.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
+datasets['MC']['TTTo2L2Nu'].append(entry)
+
+# File
+entry = {"tag":'TTTo2L2Nu_2015_0003', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/088F2069-56BA-E511-B4F9-0025900EB52A.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
+datasets['MC']['TTTo2L2Nu'].append(entry)
+
+# File
+entry = {"tag":'TTTo2L2Nu_2015_0004', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/163BBEE5-54BA-E511-A348-0022195D96C0.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
+datasets['MC']['TTTo2L2Nu'].append(entry)
+
 ################################################################################
 
 datasets['MC']['DY'] = []
@@ -89,6 +111,10 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, 
             print(dataset)
             #print()
 
+            if counter<2:
+                counter += 1
+                continue
+
             counter_tag = f"{counter:04d}"
 
             miniAOD = dataset["miniAOD_file"]
@@ -99,7 +125,8 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, 
             print("# Run this command to copy over the file...\n")
             cmd = f'xrdcp {miniAOD} {miniAOD_local_file}\n'
             print(cmd)
-            os.system(cmd)
+            if RUN:
+                os.system(cmd)
             print()
 
             print("# Then run this command to create the configuration file convert from miniAOD to NanoAOD...\n")
@@ -108,14 +135,16 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, 
             cmd += f' --filein file:{miniAOD_local_file} --era Run2_25ns,run2_nanoAOD_106X2015 --no_exec --mc -n {number_of_events} '
             cmd += f' --customise PhysicsTools/PFNano/pfnano_cff.PFnano_customizeMC_onlyPF'
             print(cmd)
-            os.system(cmd)
+            if RUN:
+                os.system(cmd)
             print()
             print()
 
             print("# Then run this command to actually do the conversion from miniAOD to NanoAOD...it may take a while\n")
             cmd = f'time cmsRun {configuration_file}'
             print(cmd)
-            os.system(cmd)
+            if RUN:
+                os.system(cmd)
             print()
 
             print("# The file that was produced should be the following. Upload this file to GCP")
@@ -127,7 +156,8 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, 
             print("# Copying over the file to CERNBox space...")
             cmd = f"cp {output_file} /afs/cern.ch/user/m/mbellis/eos_storage/data_files/."
             print(cmd)
-            os.system(cmd)
+            if RUN:
+                os.system(cmd)
 
             counter += 1
 
