@@ -21,41 +21,42 @@ datasets['MC']['TTbar'].append(TTbar_file)
 
 ################################################################################
 # New for 2024!
-datasets['MC']['TTTo2L2Nu'] = []
+dataset_name = 'TTTo2L2Nu_2015'
+datasets['MC'][dataset_name] = []
 # File
-entry = {"tag":'TTTo2L2Nu_2015_0000', \
+entry = {"tag":'0000', \
         "GCP_location":'/content/colab_directory/MC_TTTo2L2Nu_2015_nevents_100_0000_NanoAOD.root', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02A468DA-E8B9-E511-942C-0022195E688C.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
-datasets['MC']['TTTo2L2Nu'].append(entry)
+datasets['MC'][dataset_name].append(entry)
 
 # File
-entry = {"tag":'TTTo2L2Nu_2015_0001', \
-        "GCP_location":'', \
+entry = {"tag":'0001', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02E52F5F-C5B9-E511-A146-001EC9ADE1C2.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
-datasets['MC']['TTTo2L2Nu'].append(entry)
+datasets['MC'][dataset_name].append(entry)
 
 # File
-entry = {"tag":'TTTo2L2Nu_2015_0002', \
-        "GCP_location":'', \
+entry = {"tag":'0002', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/007FEAD7-53BA-E511-B4F0-001EC9ADE6D1.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
-datasets['MC']['TTTo2L2Nu'].append(entry)
+datasets['MC'][dataset_name].append(entry)
 
 # File
-entry = {"tag":'TTTo2L2Nu_2015_0003', \
-        "GCP_location":'', \
+entry = {"tag":'0003', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/088F2069-56BA-E511-B4F9-0025900EB52A.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
-datasets['MC']['TTTo2L2Nu'].append(entry)
+datasets['MC'][dataset_name].append(entry)
 
 # File
-entry = {"tag":'TTTo2L2Nu_2015_0004', \
-        "GCP_location":'', \
+entry = {"tag":'0004', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/70000/163BBEE5-54BA-E511-A348-0022195D96C0.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
-datasets['MC']['TTTo2L2Nu'].append(entry)
+datasets['MC'][dataset_name].append(entry)
 
 ################################################################################
 
@@ -83,7 +84,7 @@ datasets['MC']['Darkmatter'].append(darkmatter_file)
 ###############################################################################################
 
 ###############################################################################################
-def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, RUN=False):
+def generate_nicks_recipe(all_datasets, dataset_name, IS_MC=False, number_of_events=-1, RUN=False):
 
     print(number_of_events)
     tag_nevents = 'default'
@@ -103,24 +104,27 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, 
     '''
 
     if IS_MC:
-        datasets = all_datasets['MC'][tag]
+        datasets = all_datasets['MC'][dataset_name]
         print("Generating commands to run...")
-        counter = 0
+        #counter = 0
         for dataset in datasets:
             print("##############\nData set....\n##############\n")
             print(dataset)
             #print()
 
+            '''
             if counter<2:
                 counter += 1
                 continue
+            '''
 
-            counter_tag = f"{counter:04d}"
+            #counter_tag = f"{counter:04d}"
+            counter_tag = dataset['tag']
 
             miniAOD = dataset["miniAOD_file"]
             miniAOD_local_file = miniAOD.split('/')[-1]
-            configuration_file = f'MC_{tag}_{counter_tag}_{tag_nevents}_cfg.py'
-            output_file = f'MC_{tag}_2015_{tag_nevents}_{counter_tag}_NanoAOD.root'
+            configuration_file = f'MC_{dataset_name}_{counter_tag}_{tag_nevents}_cfg.py'
+            output_file = f'MC_{dataset_name}_{tag_nevents}_{counter_tag}_NanoAOD.root'
 
             print("# Run this command to copy over the file...\n")
             cmd = f'xrdcp {miniAOD} {miniAOD_local_file}\n'
@@ -159,7 +163,7 @@ def generate_nicks_recipe(all_datasets,  tag, IS_MC=False, number_of_events=-1, 
             if RUN:
                 os.system(cmd)
 
-            counter += 1
+            #counter += 1
 
 ###############################################################################################
 '''
