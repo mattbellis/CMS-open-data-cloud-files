@@ -60,6 +60,41 @@ datasets['MC'][dataset_name].append(entry)
 
 ################################################################################
 
+dataset_name = 'TTToSemiLep_2015'
+datasets['MC'][dataset_name] = []
+# File
+entry = {"tag":'0000', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/00001/180C1AEA-20CA-E511-A65D-02163E01649D.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0001', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/00001/2AD47C2F-0BC7-E511-8B23-3417EBE74303.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0002', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/10001/265FA771-1EC5-E511-8463-0025907750A0.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0003', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/10001/D837FF2F-9AC6-E511-928C-001EC9B21C7C.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0004', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/20000/04C72F5E-ADC1-E511-ACD2-002590D0B00A.root', \
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
+datasets['MC'][dataset_name].append(entry)
+
+###############################################################################
+
 datasets['MC']['DY'] = []
 dy_file = {"tag":'DY_2015_0000', \
         "GCP_location":'/content/colab_directory/DY_2015_0000_NANOAOD.root', \
