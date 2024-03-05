@@ -93,6 +93,42 @@ entry = {"tag":'0004', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
 datasets['MC'][dataset_name].append(entry)
 
+################################################################################
+
+dataset_name = 'DYToLL_M_1_2015'
+datasets['MC'][dataset_name] = []
+# File
+entry = {"tag":'0000', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/1AED42CB-51BB-E511-AADA-00259048AE52.root',
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0001', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/34B7FBE5-80BB-E511-901F-001517E7410C.root',
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0002', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/3C480167-61BB-E511-80D4-003048CB8610.root',
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0003', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/4CFD0E08-66BB-E511-A67A-00304867FD83.root',
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
+datasets['MC'][dataset_name].append(entry)
+
+entry = {"tag":'0004', \
+        "GCP_location":'', \
+        "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/6A1EE854-4CBB-E511-837B-002590D9D990.root',
+        "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
+datasets['MC'][dataset_name].append(entry)
+
+
 ###############################################################################
 
 datasets['MC']['DY'] = []
