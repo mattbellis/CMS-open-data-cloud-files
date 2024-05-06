@@ -46,7 +46,7 @@ dataset_name = 'TTTo2L2Nu_2015'
 datasets['MC'][dataset_name] = []
 # File
 entry = {"tag":'0000', \
-        "GCP_location":'/content/colab_directory/MC_TTTo2L2Nu_2015_nevents_100_0000_NanoAOD.root', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTTo2L2Nu_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/00000/02A468DA-E8B9-E511-942C-0022195E688C.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19958'}
 datasets['MC'][dataset_name].append(entry)
@@ -85,31 +85,31 @@ dataset_name = 'TTToSemiLep_2015'
 datasets['MC'][dataset_name] = []
 # File
 entry = {"tag":'0000', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/00001/180C1AEA-20CA-E511-A65D-02163E01649D.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0001', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/00001/2AD47C2F-0BC7-E511-8B23-3417EBE74303.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0002', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/10001/265FA771-1EC5-E511-8463-0025907750A0.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0003', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/10001/D837FF2F-9AC6-E511-928C-001EC9B21C7C.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0004', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/TTToSemiLeptonic_13TeV-powheg/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12_ext1-v1/20000/04C72F5E-ADC1-E511-ACD2-002590D0B00A.root', \
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/19966'}
 datasets['MC'][dataset_name].append(entry)
@@ -120,31 +120,31 @@ dataset_name = 'DYToLL_M_1_2015'
 datasets['MC'][dataset_name] = []
 # File
 entry = {"tag":'0000', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/1AED42CB-51BB-E511-AADA-00259048AE52.root',
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0001', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/34B7FBE5-80BB-E511-901F-001517E7410C.root',
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0002', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/3C480167-61BB-E511-80D4-003048CB8610.root',
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0003', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/4CFD0E08-66BB-E511-A67A-00304867FD83.root',
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
 datasets['MC'][dataset_name].append(entry)
 
 entry = {"tag":'0004', \
-        "GCP_location":'', \
+        "GCP_location":'/content/colab_directory', \
         "miniAOD_file": 'root://eospublic.cern.ch//eos/opendata/cms/mc/RunIIFall15MiniAODv2/DYToLL_M_1_TuneCUETP8M1_13TeV_pythia8/MINIAODSIM/PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/10000/6A1EE854-4CBB-E511-837B-002590D9D990.root',
         "OpenDataPortal_link": 'https://opendata.cern.ch/record/16490'}
 datasets['MC'][dataset_name].append(entry)
